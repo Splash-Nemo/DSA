@@ -1,16 +1,12 @@
 class Solution:
-    def climbStairs(self, n: int) -> int:
-        if n==0 or n==1 or n==2:
-            return n
-        
-        arr= []
-        arr.append(0)
-        arr.append(1)
-        arr.append(2)
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        n = len(cost)
+        arr = [0] * n
 
-        for i in range(3, n+1):
-            temp= arr[i-1]+arr[i-2]
-            arr.append(temp)
-        
-        return arr[n]
-        
+        arr[0] = cost[0]
+        arr[1] = cost[1]
+
+        for i in range(2, n):
+            arr[i] = cost[i] + min(arr[i - 1], arr[i - 2])
+
+        return min(arr[n - 1], arr[n - 2])
